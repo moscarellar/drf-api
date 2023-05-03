@@ -35,6 +35,7 @@ class Post(models.Model):
         max_length=32, choices=image_filter_choices, default='normal'
     )
     link = models.URLField(blank=True, null=True)
+    is_meme = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-created_at']
