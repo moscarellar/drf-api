@@ -68,9 +68,7 @@ ALLOWED_HOSTS = [
 ]
 
 if 'CLIENT_ORIGIN' in os.environ:	
-    CORS_ALLOWED_ORIGINS = [	
-        os.environ.get('CLIENT_ORIGIN')	
-    ]	
+    CORS_ALLOWED_ORIGINS = ['*']
 if 'CLIENT_ORIGIN_DEV' in os.environ:	
     extracted_url = re.match(	
         r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE	
@@ -83,6 +81,7 @@ CORS_ALLOW_CREDENTIALS = True
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
