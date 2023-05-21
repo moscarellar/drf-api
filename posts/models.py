@@ -34,7 +34,6 @@ class Post(models.Model):
     image_filter = models.CharField(
         max_length=32, choices=image_filter_choices, default='normal'
     )
-    link = models.URLField(blank=True, null=True)
 
     class Meta:
         ordering = ['-created_at']
