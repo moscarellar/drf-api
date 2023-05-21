@@ -15,4 +15,9 @@ class Migration(migrations.Migration):
             name='is_meme',
             field=models.BooleanField(default=False),
         ),
+        migrations.AddField(
+            model_name='post',
+            name='link',
+            field=models.URLField(blank=True, null=True),
+        ),
     ]
