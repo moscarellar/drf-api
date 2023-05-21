@@ -17,7 +17,6 @@ class Profile(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        
         return f"{self.owner}'s profile"
 
 
