@@ -18,11 +18,7 @@ if os.path.exists('env.py'):
     import env
 
 CLOUDINARY_STORAGE = {
-    'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL'),
-    'CLOUDINARY_UPLOAD_OPTIONS': {
-        'resource_type': 'auto',
-        'folder': 'media/images'
-    }
+    'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
 }
 
 MEDIA_URL = '/media/'
