@@ -9,7 +9,10 @@ class TodoList(generics.ListCreateAPIView):
     """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = TodoSerializer
-    queryset = Todo.objects.all()
+
+    def get_queryset(self):
+        user = self.request.user
+        return Todo.objects.filter(owner=user)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -20,4 +23,7 @@ class TodoDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
     serializer_class = TodoSerializer
-    queryset = Todo.objects.all()
+
+    def get_queryset(self):
+        user = self.request.user
+        return Todo.objects.filter(owner=user)
