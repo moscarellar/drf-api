@@ -7,7 +7,7 @@ class TodoList(generics.ListCreateAPIView):
     """
     List todos or create a new todo if logged in.
     """
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = TodoSerializer
     queryset = Todo.objects.all()
 
