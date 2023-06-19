@@ -52,7 +52,8 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')
 
-    # def perform_destroy(self, instance):
+    def perform_destroy(self, instance):
+        instance.delete()
     #     # Delete comments
     #     instance.comments.all().delete()
 

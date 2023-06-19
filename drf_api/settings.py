@@ -67,6 +67,7 @@ ALLOWED_HOSTS = [
    'localhost',
    '8000-moscarellar-drfapi-m463pcveojo.ws-eu98.gitpod.io',
    '8000-moscarellar-drfapi-m463pcveojo.ws-eu99.gitpod.io',
+   '8000-moscarellar-drfapi-m463pcveojo.ws-eu100.gitpod.io',
 ]
 
 
