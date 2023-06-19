@@ -52,12 +52,12 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')
 
-    def perform_destroy(self, instance):
-        # Delete comments
-        instance.comments.all().delete()
+    # def perform_destroy(self, instance):
+    #     # Delete comments
+    #     instance.comments.all().delete()
 
-        # Delete likes
-        instance.likes.all().delete()
+    #     # Delete likes
+    #     instance.likes.all().delete()
 
-        # Delete the post
-        instance.delete()
+    #     # Delete the post
+    #     instance.delete()
