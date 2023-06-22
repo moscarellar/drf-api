@@ -1,38 +1,78 @@
-#API Manual Testing
+# DRF API Manual Testing
 
 ## Methodology
 
-All users should be able to create events, but should only be able to invite users from their own tribe, and events should only be viewable by members of the same tribe. Users should be able to edit events they created but not those created by other users, except the tribe admin who should be able to edit all events created by members of their tribe.
+This document provides a guide for manual testing of the DRF API. Each test case is designed to verify the functionality of a specific endpoint.
 
-Notifications are created programatically. Only the recipient of a notification should be able to delete it.
+## Table of Contents
 
-Users should be able to edit their own profiles, but not those of other users, except for the tribe admin who should be able to edit profiles for all members of their tribe (but not those for members of other tribes). Users should be able to delete their own profiles and deactivate their accounts, but not those of other users, except for the tribe admin who should be able to close the accounts of other users who are part of their tribe.
+- `/auth/users/` POST (User Registration)
+- `/auth/token/login/` POST (User Login)
+- `/posts/` POST (Create a Post)
+- `/comments/` POST (Create a Comment)
+- `/posts/<id>/` DELETE (Delete a Post)
 
-Please note that object id numbers used in the tests may vary in the screenshots and in the current state of the database, because some of the tests involved permanent deletion of objects, with similar objects subsequently recreated to continue testing.
+## `/auth/users/` POST (User Registration)
 
-Tests were performed using the Django Rest Framework HTML interface running on a test server. Each endpoint has a heading below, with the corresponding tests and results.
+**Test 1 - Successful Registration**
 
-## Table of contents
+1. Send a POST request to `/auth/users/` with a unique username, email, and password.
+2. Verify that the server responds with a 201 status code and a JSON object containing the new user's details.
 
-- [POST](#--accounts-tribe--post)
-  * [Test 1](#test-1)
+**Test 2 - Registration with Existing Username**
 
+1. Send a POST request to `/auth/users/` with a username that already exists in the database.
+2. Verify that the server responds with a 400 status code and an error message indicating that the username is already taken.
 
-- [POST](#--accounts-user---post)
-  * [Test 7](#test-7)
+## `/auth/token/login/` POST (User Login)
 
--
+**Test 3 - Successful Login**
 
-## POST
+1. Send a POST request to `/auth/token/login/` with a valid username and password.
+2. Verify that the server responds with a 200 status code and a JSON object containing the user's authentication token.
 
-### Test 1
-When unauthenticated, a POST request to this endpoint with the following data should result in creation of new user 'chief1', a new user profile linked to 'chief1' *with family admin status* and a new tribe called 'Tribe1'. Should return HTTP status 201.
+**Test 4 - Login with Invalid Credentials**
 
+1. Send a POST request to `/auth/token/login/` with an incorrect username or password.
+2. Verify that the server responds with a 400 status code and an error message indicating that the login credentials are invalid.
 
-**Result: PASS**
+## `/posts/` POST (Create a Post)
 
-<p align="center">
-    <img src="/testing.png" width=800>
-</p>
+**Test 5 - Successful Post Creation**
 
+1. Send a POST request to `/posts/` with a valid authentication token and a JSON object containing the post's details.
+2. Verify that the server responds with a 201 status code and a JSON object containing the new post's details.
 
+**Test 6 - Post Creation without Authentication**
+
+1. Send a POST request to `/posts/` without an authentication token.
+2. Verify that the server responds with a 401 status code and an error message indicating that authentication is required.
+
+## `/comments/` POST (Create a Comment)
+
+**Test 7 - Successful Comment Creation**
+
+1. Send a POST request to `/comments/` with a valid authentication token and a JSON object containing the comment's details.
+2. Verify that the server responds with a 201 status code and a JSON object containing the new comment's details.
+
+**Test 8 - Comment Creation without Authentication**
+
+1. Send a POST request to `/comments/` without an authentication token.
+2. Verify that the server responds with a 401 status code and an error message indicating that authentication is required.
+
+## `/posts/<id>/` DELETE (Delete a Post)
+
+**Test 9 - Successful Post Deletion**
+
+1. Send a DELETE request to `/posts/<id>/` with a valid authentication token, where `<id>` is the ID of a post created by the authenticated user.
+2. Verify that the server responds with a 204 status code, indicating that the post was successfully deleted.
+
+**Test 10 - Post Deletion without Authentication**
+
+1. Send a DELETE request to `/posts/<id>/` without an authentication token.
+2. Verify that the server responds with a 401 status code and an error message indicating that authentication is required.
+
+**Test 11 - Post Deletion by Non-Author**
+
+1. Send a DELETE request to `/posts/<id>/` with a valid authentication token, where `<id>` is theID of a post created by a different user.
+2. Verify that the server responds with a 403 status code and an error message indicating that the user is not authorized to delete the post.
