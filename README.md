@@ -9,7 +9,7 @@
 4. [Libraries](#libraries)
 5. [Testing](#testing)
    - [Manual Testing](#manual-testing)
-6. [Known Bugs](#known-bugs)
+   - [Bugs](#bugs)
 7. [Deployment](#deployment)
 8. [Credits](#credits)
 
@@ -181,8 +181,10 @@ Verify that the server responds with a 204 status code, indicating that the todo
 1. Send a DELETE request to `/todos/<id>/` with a valid authentication token, where `<id>` is the ID of a todo created by a different user.
 2. Verify that the server responds with a 403 status code and an error message indicating that the user is not authorized to delete the todo.
 
-## Known Bugs
-(List of known issues with the software)
+### Bugs
+
+I have not found any bug at this moment.
+All implemen
 
 ## Deployment
 ## API Deployment
